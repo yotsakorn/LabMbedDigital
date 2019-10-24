@@ -131,14 +131,23 @@ int main()
       switch(input_user)
       {
         case '0':
-          STATE_number = 0;
-          break;
+            server_side.printf("Request : Number 0");
+            while(input_server != 'Y')
+            {}
+            STATE_number = 0;
+            break;
         case '1':
-          STATE_number = 1;
-          break;
+            server_side.printf("Request : Number 1");
+            while(input_server != 'Y')
+            {}
+            STATE_number = 1;
+            break;
         case '2':
-          STATE_number = 2;
-          break;
+            server_side.printf("Request : Number 2");
+            while(input_server != 'Y')
+            {}
+            STATE_number = 2;
+            break;
         case '3':
           STATE_number = 3;
           break;
