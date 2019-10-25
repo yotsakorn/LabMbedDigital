@@ -13,7 +13,6 @@ int main()
 {
 
   uint8_t STATE_Display = 0;
-  uint8_t STATE_Led = 0;
 
   uint8_t input_user = 0; 
   uint8_t input_server = 0;
@@ -183,7 +182,7 @@ int main()
       {
         value_read = analog_value.read();
         value_read = value_read*3.3;
-        user_side.printf("Analog value read = %4.2f\n",value_read);
+        user_side.printf("Analog value read = %4.2f V.\n",value_read);
       }
       STATE_Display = 10;
       break;
