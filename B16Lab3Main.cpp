@@ -3,8 +3,6 @@
 Serial user_side(D8, D2); // change to D8, D2 for BT
 Serial server_side(D1,D0); //serial PC
 
-DigitalOut myled(LED1);
-
 BusOut STATE_number(D3,D4,D5,D6);
 AnalogIn analog_value(A5);
 float value_read;
@@ -65,7 +63,7 @@ int main()
       case '1':
         server_side.printf("Request : 7-Segment Show Number 0-9\n");
         server_side.printf("Enter Y or etc. : ");
-        while(user_side.readable() == 0)
+        while(server_side.readable() == 0)
         {
         }
         switch(input_server)
@@ -88,7 +86,7 @@ int main()
       case '2':
         server_side.printf("Request : Read Analog Value\n");
         server_side.printf("Enter Y or etc. : ");
-        while(user_side.readable() == 0)
+        while(server_side.readable() == 0)
         {
         }
         switch(input_server)
@@ -116,12 +114,20 @@ int main()
 
     ///////////////////////////////////////////////////////////////////////////////////////
     case 19: //error state
+      user_side.printf("----------------------\n");
+      user_side.printf("Access Denied\n");
+      user_side.printf("----------------------\n");
+      user_side.printf("\n");
       STATE_Display = 10;
       break;
 
     
     ///////////////////////////////////////////////////////////////////////////////////////
     case 20: //display one time state
+      user_side.printf("----------------------\n");
+      user_side.printf("Access Complete\n");
+      user_side.printf("----------------------\n");
+      user_side.printf("\n");
       user_side.printf("Enter Number 0-9 : ");
       STATE_Display = 21;
       break;
@@ -130,47 +136,78 @@ int main()
       switch(input_user)
       {
         case '0':
-            server_side.printf("Request : Number 0");
-            while(input_server != 'Y')
-            {}
-            STATE_number = 0;
-            break;
+          server_side.printf("Request : Number 0");
+          while(input_server != 'Y')
+          {}
+          STATE_number = 0;
+          STATE_Display = 10;
+          break;
         case '1':
-            server_side.printf("Request : Number 1");
-            while(input_server != 'Y')
-            {}
-            STATE_number = 1;
-            break;
+          server_side.printf("Request : Number 1");
+          while(input_server != 'Y')
+          {}
+          STATE_number = 1;
+          STATE_Display = 10;
+          break;
         case '2':
-            server_side.printf("Request : Number 2");
-            while(input_server != 'Y')
-            {}
-            STATE_number = 2;
-            break;
+          server_side.printf("Request : Number 2");
+          while(input_server != 'Y')
+          {}
+          STATE_number = 2;
+          STATE_Display = 10;
+          break;
         case '3':
+          server_side.printf("Request : Number 3");
+          while(input_server != 'Y')
+          {}
           STATE_number = 3;
+          STATE_Display = 10;
           break;
         case '4':
+          server_side.printf("Request : Number 4");
+          while(input_server != 'Y')
+          {}
           STATE_number = 4;
+          STATE_Display = 10;
           break;
         case '5':
+          server_side.printf("Request : Number 5");
+          while(input_server != 'Y')
+          {}
           STATE_number = 5;
+          STATE_Display = 10;
           break;
         case '6':
+          server_side.printf("Request : Number 6");
+          while(input_server != 'Y')
+          {}
           STATE_number = 6;
+          STATE_Display = 10;
           break;
         case '7':
+          server_side.printf("Request : Number 7");
+          while(input_server != 'Y')
+          {}
           STATE_number = 7;
+          STATE_Display = 10;
           break;
         case '8':
+          server_side.printf("Request : Number 8");
+          while(input_server != 'Y')
+          {}
           STATE_number = 8;
+          STATE_Display = 10;
           break;
         case '9':
+          server_side.printf("Request : Number 9");
+          while(input_server != 'Y')
+          {}
           STATE_number = 9;
+          STATE_Display = 10;
           break;
         default:
           user_side.printf("Please Enter Number 0-9\n");
-          STATE_Display = 20;
+          STATE_Display = 21;
           break;
       }
       break;
@@ -178,6 +215,9 @@ int main()
 
     /////////////////////////////////////////////////////////////////////////////////////////
     case 30: //display state
+      user_side.printf("----------------------\n");
+      user_side.printf("Access Complete\n");
+      user_side.printf("----------------------\n");
       while(input_user == 0)
       {
         value_read = analog_value.read();
